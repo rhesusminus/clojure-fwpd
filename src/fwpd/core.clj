@@ -42,3 +42,21 @@
   "Adds a new suspect to the list of suspects"
   [new-suspect list-of-suspects]
   (conj list-of-suspects new-suspect))
+
+(defn validate-name
+  [x]
+  (contains? x :name))
+
+(defn validate-glitter-index
+  [x]
+  (contains? x :glitter-index))
+
+(def validations {:name validate-name
+                  :glitter-index validate-glitter-index})
+
+(defn validate
+  "Validates that :name and :glitter-index are present when appending new suspect"
+  [validations record]
+  (and ((get validations :name) record)
+       ((get validations :glitter-index) record)))
+
